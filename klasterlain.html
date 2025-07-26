@@ -95,14 +95,13 @@
             <h4 class="fw-bold mb-0">Detail Program Klaster</h4>
           </div>
 
-          <div class="d-flex justify-content-start mb-3">
+         <div class="d-flex justify-content-start gap-2 mb-3">
             <a href="index.html" class="btn btn-outline-success shadow-sm">
               ⬅️ Kembali
             </a>
             <a id="analisaLink" href="#" class="btn btn-outline-danger shadow-sm">
-                Analisa
-              </a>
-
+              Analisa
+            </a>
           </div>
           <div class="text-end mt-3 mb-2">
 
@@ -241,9 +240,12 @@
                   title: `${successCount} data berhasil disimpan`,
                   showConfirmButton: false,
                   timer: 1500,
+                }).then(() => {
+                  location.reload(); // reload halaman setelah notifikasi
                 });
                 return;
               }
+
 
               const { id, field, value, input } = updates.shift();
 
@@ -349,14 +351,14 @@
                 <td>${row["Klaster"] || "-"}</td>
                 <td width="60px">${row["Kegiatan"] || "-"}</td>
                 <td>
-        <div class="d-flex justify-content-between align-items-start flex-column h-100">
-          <div>${row["Indikator Kerja"] || "-"}</div>
-          <div class="mt-1 ms-auto">
-            <button class="btn btn-xs btn-outline-secondary btn-sm py-0 px-1 me-1 show-info-btn" data-type="DO" data-id="${row["No"]}">DO</button>
-            <button class="btn btn-xs btn-outline-info btn-sm py-0 px-1 show-info-btn" data-type="Cara Penghitungan" data-id="${row["No"]}">Cara</button>
-          </div>
-        </div>
-      </td>
+                <div class="d-flex justify-content-between align-items-start flex-column h-100">
+                  <div>${row["Indikator Kerja"] || "-"}</div>
+                  <div class="mt-1 ms-auto">
+                    <button class="btn btn-xs btn-outline-secondary btn-sm py-0 px-1 me-1 show-info-btn" data-type="DO" data-id="${row["No"]}">DO</button>
+                    <button class="btn btn-xs btn-outline-info btn-sm py-0 px-1 show-info-btn" data-type="Cara Penghitungan" data-id="${row["No"]}">Cara</button>
+                  </div>
+                </div>
+              </td>
 
 
 
@@ -375,9 +377,8 @@
                 </td>
                 <td>${row["Target Sasaran"] || "-"}</td>
                 <td>${row["Pencapaian (dalam satuan sasaran)"] || "-"}</td>
-                <td>${row["% Cakupan Rill"] || "-"}</td>
-                <td>${row["Ketercapaian Target Tahun N"] || "-"}</td>`;
-
+                <td>${row["% Cakupan Rill"] ? parseFloat(row["% Cakupan Rill"]).toFixed(2) : "-"}</td>
+                <td>${row["Ketercapaian Target Tahun N"] ? parseFloat(row["Ketercapaian Target Tahun N"]).toFixed(2) : "-"}</td>`;
               for (const bulan of bulanKeys) {
                 html += renderEditableCell(bulan, rowId, row[bulan]);
               }
